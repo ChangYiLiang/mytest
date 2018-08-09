@@ -1,12 +1,32 @@
 server:
-  port: 8081
+  port: 8888
 spring:
   application:
     name: fubaodai
   rabbitmq:
-    addresses: 127.0.0.1
-    port: 5672
+#    addresses: 127.0.0.1
+#    port: 5672
     username: guest
     password: guest
-    virtualHost: /
-    publisherConfirms: true
+    exchange: exchange
+    queueName1: topic.message
+    queueName2: topic.messages
+  redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+      pool:
+        maxIdle: 1000 #最大空闲连接池
+        maxTotal: 30000 #最大连接数
+        maxActive: 500 #连接池最大连接数
+  kafka:
+    producer:
+      bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      bootstrap-servers: 127.0.0.1:9092
+      group-id: sdkKafka
+      auto-offset-reset: earliest #当zookeeper中没有初始的offset时候的处理方式
+      enable-auto-commit: true #是否在消费消息后将offset同步到zookeeper，当Consumer失败后就能从zookeeper获取最新的offset
+      auto-commit-interval: 100 #自动提交的时间间隔
+    topic:
+      sdkPhoneBook: sdk_phone_book_topic
