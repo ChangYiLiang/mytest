@@ -4,11 +4,15 @@ package com.chyl.mytest.http;
 import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -26,7 +30,11 @@ import java.util.Map;
 public class HttpUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
-
+    private static final CloseableHttpClient httpClient;
+    static {
+        RequestConfig config = RequestConfig.custom().setConnectTimeout(60000).setSocketTimeout(15000).build();
+        httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
+    }
 
     public static String doGet(String url) {
         String body = "";
@@ -40,6 +48,39 @@ public class HttpUtils {
         } catch (IOException e) {
             e.printStackTrace();
             logger.error("Request {} error", url, e);
+        }
+
+        return body;
+    }
+
+    public static String doGet1(String url) {
+        String body = "";
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+        HttpGet httpget = new HttpGet(url);
+        httpget.setHeader("Connection", "close");
+        try {
+            response = httpClient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            body = EntityUtils.toString(entity, Consts.UTF_8);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error("Request {} error", url, e);
+        } finally {
+            try {
+                if (httpget != null) {
+                    httpget.releaseConnection();
+                }
+                if (response != null) {
+                    response.close();
+                    if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                        httpget.abort();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return body;

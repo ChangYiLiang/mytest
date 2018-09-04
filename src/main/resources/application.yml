@@ -30,3 +30,9 @@ spring:
       auto-commit-interval: 100 #自动提交的时间间隔
     topic:
       sdkPhoneBook: sdk_phone_book_topic
+  data:
+    mongodb:
+#      database: sdk
+#      host: 172.18.199.117
+#      username: sdk
+#      password: aw28Wh5POYi1rfOj
