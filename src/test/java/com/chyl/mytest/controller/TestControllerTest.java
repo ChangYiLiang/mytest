@@ -20,6 +20,6 @@ public class TestControllerTest {
     @Test
     public void test() {
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        HttpUtils.doGet("http://127.0.0.1:8888/controller/test");
+//        HttpUtils.doGet("http://127.0.0.1:8888/controller/test");
     }
 }

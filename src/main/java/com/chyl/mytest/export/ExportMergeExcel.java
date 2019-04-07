@@ -143,13 +143,13 @@ public class ExportMergeExcel extends AbstractExprotMergeExcel {
         //获取子节点的数目
         Field[] fields = t.getClass().getDeclaredFields();
         int rowEnd = rowStart + childNodes(t, 0) - 1;
-        //log.debug(rowStart + "====>" + rowEnd);
+//        log.debug(rowStart + "====>" + rowEnd);
         for (Field field : fields) {
             if (field.isAnnotationPresent(ExcelAttribute.class)) {
                 ExcelAttribute ea = field.getAnnotation(ExcelAttribute.class);
                 CellRangeAddress cellRangeAddress = new CellRangeAddress(rowStart, rowEnd, ea.column(),ea.column());
                 sheet.addMergedRegion(cellRangeAddress);
-                setMergeStyle(cellRangeAddress);
+//                setMergeStyle(cellRangeAddress);
             } else if (field.isAnnotationPresent(ExcelElement.class) && !field.isAnnotationPresent(ExcelAttribute.class)) {
                 if (!field.isAccessible()) {
                     field.setAccessible(true);

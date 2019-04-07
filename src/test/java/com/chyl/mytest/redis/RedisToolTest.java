@@ -28,7 +28,7 @@ public class RedisToolTest extends BaseTest{
     @Test
     public void tryGetDistributedLock() {
         Jedis jedis = jedisPool.getResource();
-        boolean res = RedisTool.tryGetDistributedLock(jedis, "chylkk00", "454", 60 * 3 * 1000);
+        boolean res = RedisTool.releaseDistributedLock(jedis, "chylkk00", "454");
         System.out.println("res="+res);
     }
 
@@ -46,7 +46,7 @@ public class RedisToolTest extends BaseTest{
         String uuid = String.valueOf(Math.random());
         boolean res = false;
         try {
-            res = RedisTool.tryGetDistributedLock(jedis,"chyl110011",uuid,1000*60*2);
+            res = RedisTool.releaseDistributedLock(jedis,"chyl110011",uuid);
             if (res) {
                 System.out.println("执行");
             }

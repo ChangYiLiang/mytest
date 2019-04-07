@@ -20,11 +20,32 @@ public class StreamTest {
     @Test
     public void stream() {
         ArrayList<User> users1 = new ArrayList<>();
+
         users.stream().filter(user -> !user.getName().equals("aaa"))
-                .sorted(Comparator.comparing(User::getMoney)).
-                forEach(u -> users1.add(u));
+                .sorted(Comparator.comparing(User::getMoney));
 
+        long start = System.currentTimeMillis();
+        users.stream().sorted(Comparator.comparing(User::getMoney));
+        long end = System.currentTimeMillis();
+        System.out.println("1-处理时间：" + (end - start) + "msc");
 
+        long start2 = System.currentTimeMillis();
+//        for (User user : users) {
+//            if (user.getName().equals("aaa")) {
+//                users1.add(user);
+//            }
+//        }
+//        users.removeAll(users1);
+        users.sort(Comparator.comparing(u -> u.getMoney()));
+        long end2 = System.currentTimeMillis();
+        System.out.println("2-处理时间：" + (end2 - start2) + "msc");
+
+//        Optional<User> u = users.stream().filter(user -> !user.getName().equals("aaa"))
+//                .sorted(Comparator.comparing(User::getMoney).reversed())
+//                .findFirst();
+//        if (u.isPresent()) {
+//            System.out.println("有值");
+//        }
         System.out.println(users.size());
     }
 

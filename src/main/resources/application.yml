@@ -15,24 +15,34 @@ spring:
       host: 127.0.0.1
       port: 6379
       password:
-      pool:
-        maxIdle: 1000 #最大空闲连接池
-        maxTotal: 30000 #最大连接数
-        maxActive: 500 #连接池最大连接数
+      jedis:
+        pool:
+          max-active: 500
+          max-idle: 1000
   kafka:
     producer:
-      bootstrap-servers: 127.0.0.1:9092
+      bootstrap-servers: 192.168.99.212:9092,192.168.99.213:9092,192.168.99.214:9092,192.168.99.215:9092,192.168.99.216:9092
+#      bootstrap-servers: 127.0.0.1:9092
+#      bootstrap-servers: 192.168.102.210:9092
     consumer:
-      bootstrap-servers: 127.0.0.1:9092
-      group-id: sdkKafka
+      bootstrap-servers: 192.168.99.212:9092 #,192.168.99.213:9092,192.168.99.214:9092192.168.99.215:9092,192.168.99.216:9092
+#      bootstrap-servers: 192.168.102.210:9092
+      group-id: sdk_test1_chyl
       auto-offset-reset: earliest #当zookeeper中没有初始的offset时候的处理方式
       enable-auto-commit: true #是否在消费消息后将offset同步到zookeeper，当Consumer失败后就能从zookeeper获取最新的offset
-      auto-commit-interval: 100 #自动提交的时间间隔
+      auto-commit-interval: 100ms #自动提交的时间间隔
     topic:
       sdkPhoneBook: sdk_phone_book_topic
+      test: sdk_test2_topic
+#sdk
   data:
     mongodb:
-#      database: sdk
-#      host: 172.18.199.117
-#      username: sdk
-#      password: aw28Wh5POYi1rfOj
+      database: sdk
+      host: 172.18.199.117
+      username: sdk
+      password: aw28Wh5POYi1rfOj
+#uat
+#  data:
+#    mongodb:
+#      database: fubaodai3
+#      host: mongo.server.fjf:27018

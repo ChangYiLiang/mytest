@@ -9,6 +9,7 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import redis.clients.jedis.Jedis;
@@ -25,7 +26,7 @@ import java.lang.reflect.Method;
 @Configuration
 @Slf4j
 @Component
-public class MyWebAppConfigurer  extends WebMvcConfigurerAdapter {
+public class MyWebAppConfigurer implements WebMvcConfigurer {
 
     @Autowired
     private JedisPool jedisPool;
@@ -41,8 +42,9 @@ public class MyWebAppConfigurer  extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new WebInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new WebInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new HandlerInterceptorAdapter() {
+            @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
                 Method method = ((HandlerMethod) handler).getMethod();
                 if (AnnotatedElementUtils.isAnnotated(method, RateLimiter.class)) {

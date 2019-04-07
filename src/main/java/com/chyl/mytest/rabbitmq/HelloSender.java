@@ -2,6 +2,8 @@ package com.chyl.mytest.rabbitmq;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

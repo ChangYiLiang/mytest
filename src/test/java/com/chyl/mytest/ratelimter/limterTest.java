@@ -18,8 +18,8 @@ public class limterTest {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
-                    String s = HttpUtils.doPostForJson("http://127.0.0.1:8888/controller/test3", "");
-                    System.out.println(s);
+//                    String s = HttpUtils.doPostForJson("http://127.0.0.1:8888/controller/test3", "");
+//                    System.out.println(s);
                 }
             };
             thread.start();
@@ -33,7 +33,7 @@ public class limterTest {
     }
 
     public static void main(String[] args) {
-        String s = HttpUtils.doPostForJson("http://127.0.0.1:8888/controller/test5", "");
+//        String s = HttpUtils.doPostForJson("http://127.0.0.1:8888/controller/test5", "");
         Integer taskCount = 2000;
         // 锁住所有线程，等待并发执行
         final CountDownLatch begin = new CountDownLatch(1);
@@ -44,8 +44,8 @@ public class limterTest {
                 public void run() {
                     try {
                         begin.await();
-                        String s = HttpUtils.doPostForJson("http://127.0.0.1:8888/controller/test3", "");
-                        System.out.println(s);
+//                        String s = HttpUtils.doPostForJson("http://127.0.0.1:8888/controller/test3", "");
+//                        System.out.println(s);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

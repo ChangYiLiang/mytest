@@ -8,12 +8,12 @@ import com.chyl.mytest.export.mo.PhoneBookListVO;
 import com.chyl.mytest.export.mo.PhoneBookMO;
 import com.chyl.mytest.export.repo.PhoneBookAutoRepo;
 import com.chyl.mytest.util.DateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -24,6 +24,7 @@ import java.util.List;
  * @author chyl
  * @create 2018-08-28 下午1:37
  */
+@Slf4j
 public class ExportTest extends BaseTest {
 
     private static String FILE_PATH = "./cardId.txt";
@@ -47,28 +48,19 @@ public class ExportTest extends BaseTest {
                 if (!CollectionUtils.isEmpty(phoneBookVO.getPhoneNumberList())) {
                     phoneBookListVO.setPhoneNumberList(phoneBookVO.getPhoneNumberList().toString());
                 }
+                if (StringUtils.hasText(phoneBookVO.getPhoneNumber())) {
+                    phoneBookListVO.setPhoneNumberList(phoneBookVO.getPhoneNumber());
+                }
                 phoneBooks.add(phoneBookListVO);
             });
             phoneBookMO.setPhoneBook(phoneBooks);
             phoneBookMOList.add(phoneBookMO);
         });
-//        for (PhoneBookDO phoneBookDO : phoneBookDOList) {
-//            PhoneBookMO phoneBookMO = new PhoneBookMO();
-//            BeanUtils.copyProperties(phoneBookDO, phoneBookMO, "phoneBook");
-//            List<PhoneBookListVO> phoneBooks = new ArrayList<>();
-//            for (PhoneBookVO phoneBookVO : phoneBookDO.getPhoneBook()) {
-//                PhoneBookListVO phoneBookListVO = new PhoneBookListVO();
-//                BeanUtils.copyProperties(phoneBookVO, phoneBookListVO);
-//                phoneBookListVO.setPhoneNumberList(phoneBookVO.getPhoneNumberList().toString());
-//                phoneBooks.add(phoneBookListVO);
-//            }
-//            phoneBookMO.setPhoneBook(phoneBooks);
-//            phoneBookMOList.add(phoneBookMO);
-//        }
         Export export = new Export();
-        String fileName = DateUtil.getCurrentDate("yyyy-MM-dd") + "催收名单";
+        String fileName = DateUtil.getCurrentDate("yyyy-MM-dd") + "催收名单(3.0)";
         String path = "/data/phoneBook/";
         export.export(phoneBookMOList, path, fileName);
+        log.info("报表导出成功");
     }
 
 

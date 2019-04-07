@@ -25,26 +25,25 @@ import java.lang.reflect.Method;
 @Component
 public class WebInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired
-    private JedisPool jedisPool;
-//    private JedisPool jedisPool = SpringUtil.getBean(JedisPool.class);
-
+//    @Autowired
+//    private JedisPool jedisPool;
+//
 //    @Override
 //    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-////        Method method = ((HandlerMethod) handler).getMethod();
-////        if (AnnotatedElementUtils.isAnnotated(method, RateLimiter.class)) {
-////            RateLimiter rateLimiter = method.getAnnotation(RateLimiter.class);
-////            int limit = rateLimiter.limit();
-////            int timeout = rateLimiter.timeout();
-////            Jedis jedis = jedisPool.getResource();
-////            String token = RedisRateLimiter.acquireTokenFromBucket(jedis, limit, timeout);
-////            if (token == null) {
-////                response.sendError(500);
-////                return false;
-////            }
-////            log.debug("token -> {}", token);
-////            jedis.close();
-////        }
-////        return true;
+//        Method method = ((HandlerMethod) handler).getMethod();
+//        if (AnnotatedElementUtils.isAnnotated(method, RateLimiter.class)) {
+//            RateLimiter rateLimiter = method.getAnnotation(RateLimiter.class);
+//            int limit = rateLimiter.limit();
+//            int timeout = rateLimiter.timeout();
+//            Jedis jedis = jedisPool.getResource();
+//            String token = RedisRateLimiter.acquireTokenFromBucket(jedis, limit, timeout);
+//            if (token == null) {
+//                response.sendError(500);
+//                return false;
+//            }
+//            log.debug("token -> {}", token);
+//            jedis.close();
+//        }
+//        return true;
 //    }
 }

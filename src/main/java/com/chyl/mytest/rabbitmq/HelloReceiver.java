@@ -3,7 +3,11 @@ package com.chyl.mytest.rabbitmq;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.support.spring.annotation.ResponseJSONP;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.data.keyvalue.repository.config.QueryCreatorType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +29,11 @@ public class HelloReceiver {
         return "success";
     }
 
-//    @RabbitListener(queues = "topic.messages")
+//    @RabbitListener(bindings = @QueueBinding(
+//            value = @Queue(name = ""),
+//            exchange = @Exchange(name = ""),
+//            key = ""
+//    ))
 //    public String process2(String a) {
 //        System.out.println("Receiver2====>>>>  : " + a);
 //        return "success";

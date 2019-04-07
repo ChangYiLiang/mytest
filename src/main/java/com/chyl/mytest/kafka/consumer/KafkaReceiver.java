@@ -15,7 +15,7 @@ import java.util.Optional;
 @Slf4j
 public class KafkaReceiver {
 
-    @KafkaListener(topics = "${spring.kafka.topic.sdkPhoneBook}")
+    @KafkaListener(topics = "${spring.kafka.topic.test}")
     public void listen(ConsumerRecord<?, ?> record) {
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
         if (kafkaMessage.isPresent()) {

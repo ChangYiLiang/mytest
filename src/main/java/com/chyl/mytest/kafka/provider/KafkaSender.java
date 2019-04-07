@@ -18,7 +18,7 @@ import java.util.Date;
 @Slf4j
 public class KafkaSender {
 
-    @Value("${spring.kafka.topic.sdkPhoneBook}")
+    @Value("${spring.kafka.topic.test}")
     private String topic;
 
     @Autowired
@@ -31,7 +31,8 @@ public class KafkaSender {
         message.setId(System.currentTimeMillis());
         message.setMsg(messages);
         message.setSendTime(new Date());
+        String key = "myKey";
         log.info("+++++++++++++++++++++  message = {}", JSON.toJSONString(message));
-        kafkaTemplate.send(topic, JSON.toJSONString(message));
+        kafkaTemplate.send(topic,key,JSON.toJSONString(message));
     }
 }

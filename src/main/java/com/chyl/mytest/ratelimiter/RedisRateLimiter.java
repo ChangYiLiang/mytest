@@ -22,7 +22,7 @@ public class RedisRateLimiter {
         long now = System.currentTimeMillis();
         Transaction transaction = jedis.multi();
 
-        //删除信号量
+        //删除限流时间之前的(当前时间-timeout)信号量
         transaction.zremrangeByScore(BUCKET_MONITOR.getBytes(), "-inf".getBytes(), String.valueOf(now - timeout).getBytes());
         ZParams params = new ZParams();
         params.weightsByDouble(1.0,0.0);

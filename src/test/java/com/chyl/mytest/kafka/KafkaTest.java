@@ -15,7 +15,7 @@ public class KafkaTest extends BaseTest{
 
     @Test
     public void test() {
-        kafkaSender.send("hello Kafka");
+        kafkaSender.send("Kafka 222");
     }
 
 }

@@ -8,5 +8,5 @@ public interface AsyncService {
 
     void asyncTest();
 
-    void normalTest();
+//    void normalTest();
 }

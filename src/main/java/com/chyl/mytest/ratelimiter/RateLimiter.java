@@ -12,4 +12,5 @@ import java.lang.annotation.*;
 public @interface RateLimiter {
     int limit() default 2;
     int timeout() default 1000;
+    String key() default "";
 }

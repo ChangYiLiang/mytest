@@ -22,8 +22,8 @@ public class RedisServiceImplTest {
 
     @Test
     public void get() {
-        String s = redisService.get("222");
-        System.out.printf(s);
+//        String s = redisService.get("222");
+//        System.out.printf(s);
     }
 
     @Test

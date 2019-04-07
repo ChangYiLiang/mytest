@@ -21,6 +21,11 @@ public class PhoneBookVO {
     private List<String> phoneNumberList;
 
     /***
+     * 电话号码
+     */
+    private String phoneNumber;
+
+    /***
      * 最后通话时间
      */
     private Long lastTimeContacted;

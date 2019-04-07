@@ -20,8 +20,8 @@ public class AsyncServiceImpl implements AsyncService {
         throw new NullPointerException();
     }
 
-    @Override
-    public void normalTest() {
-        HttpUtils.doPostForJson("http://10.130.2.91:81/OrderCheck.aspx","123");
-    }
+//    @Override
+//    public void normalTest() {
+//        HttpUtils.doPostForJson("http://10.130.2.91:81/OrderCheck.aspx","123");
+//    }
 }
