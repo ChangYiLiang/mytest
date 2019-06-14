@@ -18,5 +18,6 @@ public class PredicateTest {
         System.out.printf(res + "");
         boolean test = p1.and(p2).test(2);
         System.out.printf("" + test);
+
     }
 }
